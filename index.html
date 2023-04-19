@@ -19,10 +19,16 @@
         <h2 class="captura">- Toma tu primer Loop - </h2>
 
             <div id="contenido-btn">
-                <input id="boton_camara" type="file" capture="camera">
+                <form action="upload.php" method="post" enctype="multipart/form-data">
+                    <input id="boton_camara" type="file" capture="camera" name="file" hidden="">
+                </form>
+
             </div>
 
     </div>
+</section>
+<section id="fotos">
+
 </section>
 
 </body>
