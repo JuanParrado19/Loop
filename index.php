@@ -1,22 +1,42 @@
 <?php
-$fotos[]=[];
+$fotos = array();
 $bol = false;
-if(isset($_FILES['file'])){
-    $file = $_FILES['file'];
-    $filename = $file['name'];
-    $mimetype = $file['type'];
 
-    if (!is_dir("media")){
-        nkdir("media",0777);
+if (file_exists("contacts.json")){
+    $fotos = json_decode(file_get_contents("contacts.json"));
+}else{
+    $fotos=[];
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST"){
+    $bol = true;
+    if(isset($_FILES['file'])){
+        $file = $_FILES['file'];
+        $filename = $file['name'];
+        $mimetype = $file['type'];
+
+        if (!is_dir("media")){
+            nkdir("media",0777);
+        }
+
+        move_uploaded_file($file['tmp_name'],'media/'.$filename);
     }
 
-    move_uploaded_file($file['tmp_name'],'media/'.$filename);
-    $bol = true;
+    $fotos[] = $filename;
+
+    file_put_contents("contacts.json",json_encode($fotos));
+
+}else{
+    $bol =false;
 }
+
+
 if (!$bol){
     $str = '- Toma tu primer Loop - ';
+
 }else{
     $str = 'Ya tomaste tu primer Loop';
+    $bol = false;
 }
 
 
@@ -61,9 +81,9 @@ if (!$bol){
         <div>
             <h1>- FOTOS RECIENTES -</h1>
         </div>
-        <?php foreach($fotos as $foto): ?>
+        <?php foreach($fotos as $filename): ?>
         <div id="contenido fotos">
-            <img src="media/<?= $filename?>" alt="">
+            <img class="imagenes" src="media/<?= $filename?>" alt="">
         </div>
         <?php endforeach ?>
 </section>

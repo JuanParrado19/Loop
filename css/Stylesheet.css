@@ -85,6 +85,10 @@ header h1{
 #fotos{
     justify-content: center;
     text-align: center;
+    display: block;
+}
+.imagenes{
+    width: 800px;
 }
 #fotos h1{
     padding: 50px;
@@ -103,6 +107,7 @@ header h1{
     align-content: center;
     align-items: center;
     justify-content: center;
+    width: 800px;
 
 }
 

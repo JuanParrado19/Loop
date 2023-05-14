@@ -2,5 +2,9 @@ var fileInput = document.getElementById("file");
 var fileStatus = document.querySelector(".file-status");
 
 fileInput.addEventListener('change',function (){
-    fileStatus.textContent = this.files[0].name;
+
+    for (var i = 0; i < 10; i++) {
+        fileStatus.textContent = this.files[i].name;
+    }
+
 })
